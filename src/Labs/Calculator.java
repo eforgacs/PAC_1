@@ -12,7 +12,7 @@ class Calculator {
         double num2 = 0.0;
         while (true) {
             char operator = getOperatorFromUser(input);
-            if(operator != 'c' && operator != 'x'){
+            if (operator != 'c' && operator != 'x') {
                 num2 = getNumFromUser(input, message);
             }
             message = "more input: ";
