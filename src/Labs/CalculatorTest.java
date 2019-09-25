@@ -78,15 +78,15 @@ class CalculatorTest {
 //    }
 
     //    Handle unknown operator errors
-    @Test
-    void unknownOperator() {
-        //TODO: revise to become parameterized
-        assertTrue(Calculator.isUnknown('$'));
-        assertFalse(Calculator.isUnknown('+'));
-        assertFalse(Calculator.isUnknown('-'));
-        assertFalse(Calculator.isUnknown('*'));
-        assertFalse(Calculator.isUnknown('/'));
-    }
+//    @Test
+//    void unknownOperator() {
+//        //TODO: revise to become parameterized
+//        assertTrue(Calculator.isUnknown('$'));
+//        assertFalse(Calculator.isUnknown('+'));
+//        assertFalse(Calculator.isUnknown('-'));
+//        assertFalse(Calculator.isUnknown('*'));
+//        assertFalse(Calculator.isUnknown('/'));
+//    }
 //    Handle invalid first calculation: clear buffer
 //    Handle invalid first calculation: exit program
 //    Handle invalid first calculation: divide by zero
