@@ -1,5 +1,3 @@
-package Labs;
-
 import java.util.Scanner;
 
 class Calculator {
