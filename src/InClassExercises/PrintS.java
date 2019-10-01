@@ -5,12 +5,9 @@ public class PrintS {
     public static void main(String[] args) {
 
         int horizontalLength = 6;
-        int verticalLength = horizontalLength / 2 - 1;
+        int verticalLength = (horizontalLength / 2) - 1;
         printHorizontalSLine(horizontalLength);
         printVerticalSLine(verticalLength);
-        printHorizontalSLine(horizontalLength);
-        printIndentedVerticalSLine(verticalLength, horizontalLength);
-        printHorizontalSLine(horizontalLength);
     }
 
     private static void printVerticalSLine(int verticalLength) {

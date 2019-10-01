@@ -6,11 +6,6 @@ class Calculator {
     private static String message = "2nd input: ";
 
     public static void main(String[] args) {
-        System.out.println("------------------------------");
-        System.out.println("*** Welcome to Calculator ***");
-        System.out.println("This application performs the following operations: +, -, *, /");
-        System.out.println("c: Clear\tx: Exit");
-        System.out.println("------------------------------");
         Scanner input = new Scanner(System.in);
         double buffer = getNumFromUser(input, "1st input: ");
         boolean clearBuffer = false;
@@ -39,10 +34,8 @@ class Calculator {
                     }
                     break;
                 case 'c':
-                    System.out.println("Clearing buffer...");
                     clearBuffer = true;
                     buffer = 0.0;
-                    System.out.println("Buffer cleared.");
                     break;
                 case 'x':
                     System.out.println("Exiting...");
