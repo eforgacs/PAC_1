@@ -39,18 +39,15 @@ public class Car {
                     System.out.print("Direction: ");
                     char horizontalOrVertical = s.next().charAt(0);
                     int distanceToMove = 0;
-                    try {
-                        System.out.print("Enter a movement distance: ");
-                        distanceToMove = s.nextInt();
-                    } catch (Exception e) {
-                        System.out.println("Invalid distance input.");
-                        continue;
-                    }
                     switch (horizontalOrVertical) {
                         case 'H':
+                            System.out.print("Enter a movement distance: ");
+                            distanceToMove = s.nextInt();
                             moveHorizontally(distanceToMove);
                             break;
                         case 'V':
+                            System.out.print("Enter a movement distance: ");
+                            distanceToMove = s.nextInt();
                             moveVertically(distanceToMove);
                             break;
                         default:
