@@ -6,7 +6,7 @@ class SmallInt {
 
     SmallInt(int passedValue) {
         value = 0;
-        if(verifyRange(passedValue)){
+        if (verifyRange(passedValue)) {
             value = passedValue;
         }
     }
@@ -30,7 +30,7 @@ class SmallInt {
 
     void setDec(int passedIntToSet) {
         value = 0;
-        if(verifyRange(passedIntToSet)){
+        if (verifyRange(passedIntToSet)) {
             value = passedIntToSet;
         }
     }
@@ -126,7 +126,6 @@ class SmallInt {
 // Lastly, return the hexadecimal StringBuilder converted to a String.
         return hexString.toString();
     }
-
 
     private static int binaryToDecimal(int binaryInt) {
         int decimal = 0;

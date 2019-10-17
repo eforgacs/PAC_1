@@ -1,7 +1,9 @@
+package Labs;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public class CarArrays {
+public class CarOOP {
 
     private static final int MIN = 1;
     private static final int MAX = 20;
@@ -141,7 +143,7 @@ public class CarArrays {
                 break;
         }
         System.out.println("Color: " + color);
-        String ignitionState = currentCarArrays.ignitions[carIndex] ? "On" : "Off";
+        String ignitionState = currentCarArrays.ignitions[carIndex - 1] ? "On" : "Off";
         System.out.println("Ignition: " + ignitionState);
         System.out.printf("Location: (%d, %d)\n", currentCarArrays.xCoordinates[carIndex], currentCarArrays.yCoordinates[carIndex]);
         for (int yPos = MIN; yPos <= MAX; yPos++) {
