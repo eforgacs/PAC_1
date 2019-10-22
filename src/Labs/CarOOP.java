@@ -4,27 +4,25 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CarOOP {
-
     private static final int MIN = 1;
     private static final int MAX = 20;
-    private static final int TOTAL_CARS = 10;
     private static Scanner s = new Scanner(System.in);
+    private char color;
+    private boolean ignition;
+    private int xCoordinate;
+    private int yCoordinate;
 
-    private boolean[] ignitions = new boolean[TOTAL_CARS];
-    private char[] colors = new char[TOTAL_CARS];
-    private int[] xCoordinates = new int[TOTAL_CARS];
-    private int[] yCoordinates = new int[TOTAL_CARS];
+    public CarOOP() {
+        ignition = false;
+        assignColor();
+        randomizeXCoordinate();
+        randomizeYCoordinate();
+    }
 
     public static void main(String[] args) {
-        CarArrays myCarArrays = new CarArrays();
-        for (int i = 0; i < myCarArrays.colors.length; i++) {
-            myCarArrays.colors[i] = assignColor();
-        }
-        for (int i = 0; i < myCarArrays.xCoordinates.length; i++) {
-            myCarArrays.xCoordinates[i] = randomizePosition();
-        }
-        for (int i = 0; i < myCarArrays.yCoordinates.length; i++) {
-            myCarArrays.yCoordinates[i] = randomizePosition();
+        CarOOP[] myCarOOP = new CarOOP[10];
+        for (int i = 0; i < myCarOOP.length; i++) {
+            myCarOOP[i] = new CarOOP();
         }
 
         System.out.println("Reporting...");
@@ -32,6 +30,7 @@ public class CarOOP {
         while (true) {
             System.out.println("Which car would you like to use? (Choose from 1-10)");
             int chosenCar = s.nextInt();
+            int chosenCarIndex = chosenCar - 1;
             System.out.println("Input: " + chosenCar);
             System.out.println();
             System.out.println("What would you like to do?");
@@ -42,7 +41,7 @@ public class CarOOP {
             System.out.println("Input: " + choice);
             switch (choice) {
                 case '1':
-                    ignitionSwitch(myCarArrays.ignitions, chosenCar - 1);
+                    myCarOOP[chosenCarIndex].ignitionSwitch();
                     break;
                 case '2':
                     System.out.println("In which direction do you want to move the car?");
@@ -55,12 +54,12 @@ public class CarOOP {
                         case 'H':
                             System.out.print("Enter a movement distance: ");
                             distanceToMove = s.nextInt();
-                            myCarArrays.xCoordinates[chosenCar - 1] = myCarArrays.moveHorizontally(distanceToMove, chosenCar-1);
+                            myCarOOP[chosenCarIndex].moveHorizontally(distanceToMove);
                             break;
                         case 'V':
                             System.out.print("Enter a movement distance: ");
                             distanceToMove = s.nextInt();
-                            myCarArrays.yCoordinates[chosenCar - 1] = myCarArrays.moveVertically(distanceToMove, chosenCar - 1);
+                            myCarOOP[chosenCarIndex].moveVertically(distanceToMove);
                             break;
                         default:
                             System.out.println("You have entered an incorrect option. Please try again.");
@@ -76,53 +75,17 @@ public class CarOOP {
                     System.out.println("You have entered an incorrect option. Please try again.");
                     break;
             }
-            reportState(chosenCar, myCarArrays);
+            reportState(chosenCar, myCarOOP[chosenCarIndex]);
         }
 
     }
 
-    private static int randomizePosition() {
-
-        double x = (int) (Math.random() * ((MAX - MIN) + 1)) + MIN;
-        return (int) x;
-    }
-
-    private static char assignColor() {
-        char[] colors = {'R', 'G', 'B', 'W', 'S'};
-        int randomNumber = new Random().nextInt(colors.length);
-        return colors[randomNumber];
-    }
-
-    private static boolean ignitionSwitch(boolean[] currentIgnitions, int carNumber) {
-        return currentIgnitions[carNumber] = !currentIgnitions[carNumber];
-    }
-
-    private int moveHorizontally(int movementDistance, int carNumber) {
-        return xCoordinates[carNumber] = move(xCoordinates[carNumber], movementDistance, carNumber);
-    }
-
-    private int moveVertically(int movementDistance, int carNumber) {
-        return yCoordinates[carNumber] = move(yCoordinates[carNumber], movementDistance, carNumber);
-    }
-
-    private int move(int coordinate, int movementDistance, int carNumber) {
-        if (!ignitions[carNumber]) {
-            System.out.println("The ignition is off. Please start the car.");
-        } else if ((coordinate + movementDistance > MAX) || (coordinate + movementDistance < MIN)) {
-            System.out.println("The value you have chosen to move would place the car outside of the grid. " +
-                    "Please choose a different value.");
-        } else {
-            coordinate += movementDistance;
-        }
-        return coordinate;
-    }
-
-    private static void reportState(int carNumber, CarArrays currentCarArrays) {
+    private static void reportState(int carNumber, CarOOP currentCarOOP) {
         int carIndex = carNumber - 1;
         System.out.println("Car Information");
         System.out.println("Car#: " + carNumber);
         String color;
-        switch (currentCarArrays.colors[carIndex]) {
+        switch (currentCarOOP.getColor()) {
             case 'R':
                 color = "Red";
                 break;
@@ -143,13 +106,13 @@ public class CarOOP {
                 break;
         }
         System.out.println("Color: " + color);
-        String ignitionState = currentCarArrays.ignitions[carIndex - 1] ? "On" : "Off";
+        String ignitionState = currentCarOOP.getIgnition() ? "On" : "Off";
         System.out.println("Ignition: " + ignitionState);
-        System.out.printf("Location: (%d, %d)\n", currentCarArrays.xCoordinates[carIndex], currentCarArrays.yCoordinates[carIndex]);
+        System.out.printf("Location: (%d, %d)\n", currentCarOOP.getXCoordinate(), currentCarOOP.getYCoordinate());
         for (int yPos = MIN; yPos <= MAX; yPos++) {
             for (int xPos = MIN; xPos <= MAX; xPos++) {
-                if (xPos == currentCarArrays.xCoordinates[carIndex] && yPos == currentCarArrays.yCoordinates[carIndex]) {
-                    System.out.printf("%s ", currentCarArrays.colors[carIndex]);
+                if (xPos == currentCarOOP.getXCoordinate() && yPos == currentCarOOP.getYCoordinate()) {
+                    System.out.printf("%s ", currentCarOOP.getColor());
                 } else {
                     System.out.print("- ");
                 }
@@ -157,5 +120,68 @@ public class CarOOP {
             }
             System.out.println();
         }
+    }
+
+    public int getXCoordinate() {
+        return xCoordinate;
+    }
+
+    public int getYCoordinate() {
+        return yCoordinate;
+    }
+
+    public boolean getIgnition() {
+        return ignition;
+    }
+
+    public char getColor() {
+        return color;
+    }
+
+    public void ignitionSwitch() {
+        ignition = !ignition;
+    }
+
+    private int randomizePosition() {
+        double x = (int) (Math.random() * ((MAX - MIN) + 1)) + MIN;
+        return (int) x;
+    }
+
+    private void randomizeXCoordinate() {
+        xCoordinate = randomizePosition();
+    }
+
+    private void randomizeYCoordinate() {
+        yCoordinate = randomizePosition();
+    }
+
+//    private static boolean ignitionSwitch(boolean[] currentIgnitions, int carNumber) {
+//        return currentIgnitions[carNumber] = !currentIgnitions[carNumber];
+//    }
+
+    private void assignColor() {
+        char[] colors = {'R', 'G', 'B', 'W', 'S'};
+        int randomNumber = new Random().nextInt(colors.length);
+        color = colors[randomNumber];
+    }
+
+    public void moveHorizontally(int movementDistance) {
+        xCoordinate = move(xCoordinate, movementDistance);
+    }
+
+    public void moveVertically(int movementDistance) {
+        yCoordinate = move(yCoordinate, movementDistance);
+    }
+
+    private int move(int coordinate, int movementDistance) {
+        if (!ignition) {
+            System.out.println("The ignition is off. Please start the car.");
+        } else if ((coordinate + movementDistance > MAX) || (coordinate + movementDistance < MIN)) {
+            System.out.println("The value you have chosen to move would place the car outside of the grid. " +
+                    "Please choose a different value.");
+        } else {
+            coordinate += movementDistance;
+        }
+        return coordinate;
     }
 }

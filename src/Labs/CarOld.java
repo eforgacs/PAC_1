@@ -4,7 +4,7 @@ import java.util.Random;
 
 import java.util.Scanner;
 
-public class Car {
+public class CarOld {
     static final int MIN = 1;
     static final int MAX = 20;
     public static boolean ignition = false;
@@ -78,7 +78,7 @@ public class Car {
     public static char assignColor() {
         char[] colors = {'R', 'G', 'B', 'W', 'S'};
         int randomNumber = new Random().nextInt(colors.length);
-        return Car.color = colors[randomNumber];
+        return CarOld.color = colors[randomNumber];
     }
 
     public static boolean ignitionSwitch() {
@@ -109,7 +109,7 @@ public class Car {
 
         System.out.println("Car Information");
         String color;
-        switch (Car.color) {
+        switch (CarOld.color) {
             case 'R':
                 color = "Red";
                 break;
@@ -136,7 +136,7 @@ public class Car {
         for (int yPos = MIN; yPos <= MAX; yPos++) {
             for (int xPos = MIN; xPos <= MAX; xPos++) {
                 if (xPos == xCoordinate && yPos == yCoordinate) {
-                    System.out.printf("%s ", Car.color);
+                    System.out.printf("%s ", CarOld.color);
                 } else {
                     System.out.print("- ");
                 }

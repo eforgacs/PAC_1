@@ -6,5 +6,7 @@
 .idea/project-template.xml
 .idea/uiDesigner.xml
 .idea/vcs.xml
+*.class
 .DS_Store
 PAC_1.iml
+/out/
