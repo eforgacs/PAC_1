@@ -2,24 +2,23 @@ package DShoppe.DShoppe;
 
 public class Checkout {
     private DessertItem[] dessertItemArray;
-    private int itemNumbers;
-    private int totalTax;
+    public int numberOfItems;
 
     Checkout() {
         dessertItemArray = new DessertItem[100];
-        itemNumbers = 0;
+        numberOfItems = 0;
     }
 
-    void clear() {
-        for (int i = 0; i < itemNumbers; i++) {
+    public void clear() {
+        for (int i = 0; i < numberOfItems; i++) {
             dessertItemArray[i] = null;
         }
-        itemNumbers = 0;
+        numberOfItems = 0;
 
     }
 
-    void enterItem(DessertItem item) {
-        dessertItemArray[itemNumbers++] = item;
+    public void enterItem(DessertItem item) {
+        dessertItemArray[numberOfItems++] = item;
 
     }
 
@@ -31,11 +30,11 @@ public class Checkout {
 //            if (dessertItemArray[i] != null) {
 //                count++;
 //            }
-        return itemNumbers;
+        return numberOfItems;
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         StringBuilder receipt = new StringBuilder();
         String storeName = DessertShoppe.STORE_NAME;
         String divider = "--------------------";
@@ -44,36 +43,50 @@ public class Checkout {
         String tax = "Tax";
         String taxInDollarsAndCents = DessertShoppe.cents2dollarsAndCents(totalTax());
         String totalCost = "Total Cost";
-        String totalCostInDollarsAndCents = DessertShoppe.cents2dollarsAndCents(totalCost());
+//        String totalCostInDollarsAndCents = DessertShoppe.cents2dollarsAndCents(totalCost());
+        String totalCostPlusTaxInDollarsAndCents = DessertShoppe.cents2dollarsAndCents(totalCost() + totalTax());
         receipt.append(storeNameLine);
         receipt.append(dividerLine);
-        for (int i = 0; i < itemNumbers; i++) {
+        for (int i = 0; i < numberOfItems; i++) {
             int cost = dessertItemArray[i].getCost();
-//            if (dessertItemArray[i] instanceof Candy){
-//                double candyWeight = (Candy)dessertItemArray[i].getWeight();
-//            }
+            if (dessertItemArray[i] instanceof Candy) {
+                double candyWeight = ((Candy) dessertItemArray[i]).getWeight();
+                String candyCost = DessertShoppe.cents2dollarsAndCents((int) ((Candy) dessertItemArray[i]).getPricePerPound());
+//                String candyCostPerPoundLine = candyWeight + " lbs. @ " + candyCost + " /lb" + "\n";
+                String candyCostPerPoundLine = String.format("%.2f%s%s%s%n", candyWeight, " lbs. @ ", candyCost, " /lb");
+                receipt.append(candyCostPerPoundLine);
+            } else if (dessertItemArray[i] instanceof Cookie) {
+                int numberOfCookies = ((Cookie) dessertItemArray[i]).getNumberOfCookies();
+                String cookieCost = DessertShoppe.cents2dollarsAndCents((int) ((Cookie) dessertItemArray[i]).getPricePerDozen());
+//                String cookiesCostPerDozenLine = numberOfCookies + " @ " + cookieCost + " /dz." + "\n";
+                String cookiesCostPerDozenLine = String.format("%s%n", numberOfCookies + " @ " + cookieCost + " /dz.");
+                receipt.append(cookiesCostPerDozenLine);
+            } else if (dessertItemArray[i] instanceof Sundae) {
+                String toppingName = ((Sundae) dessertItemArray[i]).getToppingName();
+                String sundaeCostLine = String.format("%s Sundae with%n", toppingName);
+                receipt.append(sundaeCostLine);
+            }
             String costInDollarsAndCents = DessertShoppe.cents2dollarsAndCents(cost);
             String itemLine = String.format("%-30s%5s%n", dessertItemArray[i].name, costInDollarsAndCents);
             receipt.append(itemLine);
+
         }
-        String taxLine = String.format("%-30s%5s%n", tax, taxInDollarsAndCents);
-        String totalCostLine = String.format("%-30s%5s%n", totalCost, totalCostInDollarsAndCents);
+        String taxLine = String.format("%n%-30s%5s%n", tax, taxInDollarsAndCents);
+        String totalCostLine = String.format("%-30s%5s%n", totalCost, totalCostPlusTaxInDollarsAndCents);
         receipt.append(taxLine);
         receipt.append(totalCostLine);
         return receipt.toString();
     }
 
-    int totalCost() {
+    public int totalCost() {
         int cost = 0;
-        for (int i = 0; i < itemNumbers; i++) {
+        for (int i = 0; i < numberOfItems; i++) {
             cost += dessertItemArray[i].getCost();
         }
-        return cost + this.totalTax;
+        return cost;
     }
 
-    int totalTax() {
-        this.totalTax = (int) (totalCost() * (DessertShoppe.TAX_RATE / 100));
+    public int totalTax() {
         return (int) (totalCost() * (DessertShoppe.TAX_RATE / 100));
-
     }
 }

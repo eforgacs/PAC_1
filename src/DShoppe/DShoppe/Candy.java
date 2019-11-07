@@ -1,8 +1,8 @@
 package DShoppe.DShoppe;
 
 public class Candy extends DessertItem {
-    public double weight;
-    private float pricePerPound;
+    private double weight;
+    private int pricePerPound;
 
     Candy(String name, double weight, int pricePerPound) {
         this.name = name;
@@ -12,11 +12,15 @@ public class Candy extends DessertItem {
 
     @Override
     public int getCost() {
-        return (int) (weight * pricePerPound);
+        return Math.round((int) (weight * pricePerPound));
     }
 
 
-    public int getWeight() {
-        return (int) this.weight;
+    double getWeight() {
+        return this.weight;
+    }
+
+    int getPricePerPound() {
+        return this.pricePerPound;
     }
 }

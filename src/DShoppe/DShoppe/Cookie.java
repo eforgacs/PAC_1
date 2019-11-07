@@ -2,7 +2,7 @@ package DShoppe.DShoppe;
 
 public class Cookie extends DessertItem {
     private int number;
-    private float pricePerDozen;
+    private int pricePerDozen;
 
     Cookie(String name, int number, int pricePerDozen) {
         this.name = name;
@@ -13,6 +13,15 @@ public class Cookie extends DessertItem {
 
     @Override
     public int getCost() {
-        return (int) ((pricePerDozen / 12) * number);
+        return ((pricePerDozen / 12) * number);
+    }
+
+
+    int getNumberOfCookies() {
+        return this.number;
+    }
+
+    float getPricePerDozen() {
+        return this.pricePerDozen;
     }
 }
