@@ -18,8 +18,12 @@ public class Checkout {
     }
 
     public void enterItem(DessertItem item) {
-        dessertItemArray[numberOfItems++] = item;
-
+        try {
+            dessertItemArray[numberOfItems++] = item;
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("You have added too many items to this list. Please try again.");
+        }
     }
 
 

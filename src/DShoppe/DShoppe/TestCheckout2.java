@@ -5,11 +5,16 @@ public class TestCheckout2 {
   public static void main(String[] args) {
   
     Checkout checkout = new Checkout();
+
+    for(int i = 0; i <= 100; i++){
+      checkout.enterItem(new Candy("Peanut Butter Fudge", 2.25, 399));
+    }
     
-    checkout.enterItem(new Candy("Peanut Butter Fudge", 2.25, 399));
-    checkout.enterItem(new IceCream("Vanilla Ice Cream",105));
-    checkout.enterItem(new Sundae("Choc. Chip Ice Cream",145, "Hot Fudge", 50));
-    checkout.enterItem(new Cookie("Oatmeal Raisin Cookies", 4, 399));
+//    checkout.enterItem(new Candy("Peanut Butter Fudge", 2.25, 399));
+//    checkout.enterItem(new IceCream("Vanilla Ice Cream",105));
+//    checkout.enterItem(new Sundae("Choc. Chip Ice Cream",145, "Hot Fudge", 50));
+//    checkout.enterItem(new Cookie("Oatmeal Raisin Cookies", 4, 399));
+
     
     System.out.println("\nNumber of items: " + checkout.numberOfItems() + "\n");
     System.out.println("\nTotal cost: " + checkout.totalCost() + "\n");
