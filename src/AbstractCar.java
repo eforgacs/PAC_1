@@ -7,6 +7,10 @@ public abstract class AbstractCar {
         this.seats = seats;
     }
 
+    public AbstractCar() {
+        
+    }
+
     boolean isSedan(){
         return this.isSedan;
     }
@@ -22,5 +26,10 @@ class WagonR extends AbstractCar{
     String carMileage = "";
     WagonR(){
         super();
+    }
+
+    @Override
+    String getMileage() {
+        return null;
     }
 }
