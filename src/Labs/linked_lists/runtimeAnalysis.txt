@@ -1,0 +1,26 @@
+Part 1: Equality of Linked Lists
+
+equalLists():
+
+To compare every element of the list, we need to loop through the list, so the time complexity is linear O(n) in the worst case, and O(1) in the best case where the first two elements are already different.
+
+Part 2: Checking if a list is recursive
+
+terminates():
+
+In this function we loop until we find null and we keep pushing the addresses of the node that we have passed.
+Since we check each address to see if it is not already stored in the list using the contains built-in method of list (which is essentially a for-loop on each element), the complexity of this method is quadratic, O(n^2).
+
+Part 3: Implementing a Max-Stack
+
+FastMaxStack:
+
+isEmpty(): The complexity is O(1)
+push():
+When pushing an element into the stack, we basically create a new node at the beginning of the linked list. By adding it at the beginning, we avoid looping thus we have a constant complexity of O(1)
+
+pop(): The complexity is O(1)
+
+getMaxSoFar(): The complexity is O(1), we just return the value at the top of the stack that stores all the maximum values at every level.
+
+
